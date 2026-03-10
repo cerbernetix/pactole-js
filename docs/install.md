@@ -1,5 +1,3 @@
-[Documentation](./README.md)
-
 # Installation
 
 ```bash
