@@ -156,3 +156,27 @@ export const getCombinationFromRank = (rank: CombinationRank, length = 2, offset
 
     return values;
 };
+
+/**
+ * Generate random combination ranks.
+ *
+ * @param combinations - The total number of possible combinations.
+ * @param n - The number of random combinations to generate.
+ * @param partitions  - The number of partitions to divide the combinations into for random selection.
+ * @returns A generator yielding random combination ranks.
+ *
+ * @example
+ * `Array.from(generate(100, 5, 10)) // [3, 27, 45, 88, 12]`
+ */
+export function* generate(combinations: number, n: number = 1, partitions: number = 1) {
+    const safeN = Math.max(1, n);
+    const safePartitions = Math.max(1, partitions);
+    const partitionSize = Math.ceil(combinations / safePartitions);
+
+    for (let index = 0; index < safeN; index += 1) {
+        const partitionIndex = index % safePartitions;
+        const min = partitionSize * partitionIndex;
+        const max = Math.min(partitionSize * (partitionIndex + 1) - 1, combinations - 1);
+        yield Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+}

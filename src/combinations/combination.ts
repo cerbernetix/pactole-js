@@ -1,4 +1,4 @@
-import { getCombinationFromRank, getCombinationRank } from './rank.ts';
+import { comb, generate, getCombinationFromRank, getCombinationRank } from './rank.ts';
 import type {
     CombinationInputWithRank,
     CombinationNumber,
@@ -8,6 +8,8 @@ import type {
 } from './types.ts';
 
 const DEFAULT_START = 1;
+const DEFAULT_END = 50;
+const DEFAULT_COUNT = 5;
 
 const isInputWithRank = (value: unknown): value is CombinationInputWithRank => {
     if (typeof value !== 'object' || value === null) {
@@ -33,6 +35,28 @@ export interface CombinationCopyOptions {
     values?: CombinationInputOrRank | null;
     rank?: CombinationRank | null;
     start?: number | null;
+}
+
+export interface BoundCombinationOptions {
+    rank?: CombinationRank | null;
+    start?: number | null;
+    end?: number | null;
+    count?: number | null;
+    combinations?: number | null;
+}
+
+export interface BoundCombinationCopyOptions {
+    values?: CombinationInputOrRank | null;
+    rank?: CombinationRank | null;
+    start?: number | null;
+    end?: number | null;
+    count?: number | null;
+    combinations?: number | null;
+}
+
+export interface BoundCombinationGenerateOptions {
+    n?: number;
+    partitions?: number;
 }
 
 /**
@@ -419,5 +443,217 @@ export class Combination {
 
     public *[Symbol.iterator](): Iterator<CombinationNumber> {
         yield* this.values;
+    }
+}
+
+/**
+ * A class representing a bound combination of values.
+ *
+ * `BoundCombination` extends `Combination` with numeric bounds and a fixed
+ * component count used by lottery sub-components.
+ *
+ * @param values - The values of the combination. If an integer is provided, it is treated as a rank.
+ * @param rank - The lexicographic rank of the combination.
+ * @param start - The start value of the combination range.
+ * @param end - The end value of the combination range.
+ * @param count - The maximum count of numbers in the combination.
+ * @param combinations - The total number of possible combinations.
+ *
+ * @example
+ * const bound = new BoundCombination(10, { start: 1, end: 50, count: 5 });
+ * bound.values; // e.g. [2, 3, 4, 5, 7]
+ *
+ * @example
+ * const fixed = new BoundCombination([1, 2, 3], { start: 1, end: 50, count: 5 });
+ * fixed.count; // 5
+ * fixed.combinations; // 2118760
+ */
+export class BoundCombination extends Combination {
+    protected readonly _end: number;
+
+    protected readonly _count: number;
+
+    protected readonly _combinations: number;
+
+    public constructor(
+        values: CombinationInputOrRank | null = null,
+        { rank = null, start = null, end = null, count = null, combinations = null }: BoundCombinationOptions = {}
+    ) {
+        const targetStart = start ?? DEFAULT_START;
+        const targetEnd = end ?? DEFAULT_END;
+        const targetCount = count ?? DEFAULT_COUNT;
+        const targetCombinations = combinations ?? comb(targetEnd - targetStart + 1, targetCount);
+
+        let candidateValues: CombinationNumbers | Combination | CombinationRank | null | undefined;
+        let candidateRank = rank;
+
+        if (isInputWithRank(values)) {
+            if (candidateRank === null) {
+                candidateRank = values.rank ?? null;
+            }
+            candidateValues = values.values;
+        } else {
+            candidateValues = values;
+        }
+
+        if (candidateValues instanceof Combination) {
+            if (candidateRank === null) {
+                candidateRank = candidateValues.storedRank;
+            }
+            candidateValues = candidateValues.getValues(targetStart);
+        } else if (typeof candidateValues === 'number') {
+            if (candidateRank === null) {
+                candidateRank = candidateValues;
+            }
+            candidateValues = getCombinationFromRank(candidateValues, targetCount, targetStart);
+        } else if (!candidateValues) {
+            if (candidateRank !== null) {
+                candidateValues = getCombinationFromRank(candidateRank, targetCount, targetStart);
+            } else {
+                candidateValues = [];
+                candidateRank = null;
+            }
+        }
+
+        const normalizedValues = [...candidateValues]
+            .slice(0, targetCount)
+            .map(value => Math.min(Math.max(value, targetStart), targetEnd));
+
+        super(normalizedValues, { rank: candidateRank, start: targetStart });
+        this._end = targetEnd;
+        this._count = targetCount;
+        this._combinations = targetCombinations;
+    }
+
+    /**
+     * Return the end value of the combination range.
+     *
+     * @returns End bound.
+     *
+     * @example
+     * new BoundCombination([1, 2, 3], null, 1, 50, 5).end; // 50
+     */
+    public get end(): number {
+        return this._end;
+    }
+
+    /**
+     * Return the configured count of numbers in the combination.
+     *
+     * @returns Configured count.
+     *
+     * @example
+     * new BoundCombination([1, 2, 3], null, 1, 50, 5).count; // 5
+     */
+    public get count(): number {
+        return this._count;
+    }
+
+    /**
+     * Return the total number of possible combinations.
+     *
+     * @returns Total combinatorial space.
+     *
+     * @example
+     * new BoundCombination([1, 2, 3], null, 1, 50, 5).combinations; // 2118760
+     */
+    public get combinations(): number {
+        return this._combinations;
+    }
+
+    /**
+     * Generate random combinations within current bounds.
+     *
+     * @param n - Number of combinations to generate.
+     * @param partitions - Number of rank partitions used for generation.
+     * @returns Generated combinations.
+     *
+     * @example
+     * const generated = new BoundCombination(null, { start: 1, end: 50, count: 5 }).generate({ n: 2 });
+     * generated.length; // 2
+     */
+    public generate({ n = 1, partitions = 1 }: BoundCombinationGenerateOptions = {}): BoundCombination[] {
+        return Array.from(generate(this._combinations, n, partitions), rank => this.copy({ values: rank }));
+    }
+
+    /**
+     * Return a copy of the BoundCombination with optional modifications.
+     *
+     * @param values - Replacement values, rank, or input-with-rank payload.
+     * @param rank - Optional explicit rank override.
+     * @param start - Optional new start bound.
+     * @param end - Optional new end bound.
+     * @param count - Optional new count.
+     * @param combinations - Optional explicit combinations cardinality.
+     * @returns A new `BoundCombination`.
+     *
+     * @example
+     * const base = new BoundCombination([1, 2, 3], { start: 1, end: 50, count: 5 });
+     * base.copy({ values: 15 }).values; // rank-derived bounded values
+     */
+    public copy({
+        values = null,
+        rank = null,
+        start = null,
+        end = null,
+        count = null,
+        combinations = null
+    }: BoundCombinationCopyOptions = {}): BoundCombination {
+        let sourceValues = values;
+        let sourceRank = rank;
+        const targetStart = start ?? this._start;
+        const targetEnd = end ?? this._end;
+        const targetCount = count ?? this._count;
+        const targetCombinations =
+            combinations === null &&
+            targetStart === this._start &&
+            targetEnd === this._end &&
+            targetCount === this._count
+                ? this._combinations
+                : combinations;
+
+        if (values === null) {
+            sourceValues = this.getValues(targetStart);
+            sourceRank = this._rank !== null ? this._rank : rank;
+        }
+
+        return new BoundCombination(sourceValues, {
+            rank: sourceRank,
+            start: targetStart,
+            end: targetEnd,
+            count: targetCount,
+            combinations: targetCombinations
+        });
+    }
+
+    /**
+     * Render values with fixed-width formatting.
+     *
+     * @returns Human-readable combination string.
+     *
+     * @example
+     * new BoundCombination([1, 2, 3], null, 1, 50, 5).toString();
+     */
+    public toString(): string {
+        const digits = String(this._end).length;
+        const separator = ', ';
+        const width = digits * this._count + (this._count - 1) * separator.length;
+        const body = this.values
+            .map(value => String(value).padStart(digits, ' '))
+            .join(separator)
+            .padStart(width, ' ');
+        return `[${body}]`;
+    }
+
+    /**
+     * Render string representation.
+     *
+     * @returns Representation string.
+     *
+     * @example
+     * new BoundCombination([1, 2, 3], null, 1, 50, 5).toRepr();
+     */
+    public toRepr(): string {
+        return `BoundCombination(values=${JSON.stringify(this.values)}, rank=${this._rank === null ? 'None' : String(this._rank)}, start=${this._start}, end=${this._end}, count=${this._count}, combinations=${this._combinations})`;
     }
 }
