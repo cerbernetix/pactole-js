@@ -17,4 +17,4 @@ formats: all
 
 python:
     install:
-        - requirements: requirements.txt
+        - requirements: requirements.mkdocs.txt
