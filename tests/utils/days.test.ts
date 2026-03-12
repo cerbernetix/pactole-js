@@ -1,4 +1,4 @@
-import { Weekday, type DayInput } from 'src/utils/days';
+import { DrawDays, Weekday, type DayInput } from 'src/utils/days';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 // helpers for timestamps (seconds since epoch).  We add a tiny
@@ -190,5 +190,92 @@ describe('Weekday', () => {
         // @ts-expect-error testing invalid input types
         expect(() => Weekday.get_date({})).toThrow(TypeError);
         expect(() => Weekday.get_date('not-a-date')).toThrow(RangeError);
+    });
+});
+
+describe('DrawDays', () => {
+    const DATE_1_FRIDAY = new Date(2024, 5, 7);
+
+    const DATE_2_MONDAY = new Date(2024, 5, 10);
+    const DATE_2_TUESDAY = new Date(2024, 5, 11);
+    const DATE_2_WEDNESDAY = new Date(2024, 5, 12);
+    const DATE_2_THURSDAY = new Date(2024, 5, 13);
+    const DATE_2_FRIDAY = new Date(2024, 5, 14);
+    const DATE_2_SATURDAY = new Date(2024, 5, 15);
+    const DATE_2_SUNDAY = new Date(2024, 5, 16);
+
+    const DATE_3_TUESDAY = new Date(2024, 5, 18);
+
+    it('initializes from iterable', () => {
+        const d = new DrawDays([Weekday.MONDAY, Weekday.WEDNESDAY, Weekday.FRIDAY]);
+        expect(d.days).toEqual([Weekday.MONDAY, Weekday.WEDNESDAY, Weekday.FRIDAY]);
+    });
+
+    it('get_last_draw_date returns correct dates', () => {
+        const days = new DrawDays([Weekday.TUESDAY, Weekday.FRIDAY]);
+        // closest=false
+        expect(days.get_last_draw_date(DATE_2_MONDAY, false)).toEqual(DATE_1_FRIDAY);
+        expect(days.get_last_draw_date(DATE_2_TUESDAY, false)).toEqual(DATE_1_FRIDAY);
+        expect(days.get_last_draw_date(DATE_2_WEDNESDAY, false)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_last_draw_date(DATE_2_THURSDAY, false)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_last_draw_date(DATE_2_FRIDAY, false)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_last_draw_date(DATE_2_SATURDAY, false)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_last_draw_date(DATE_2_SUNDAY, false)).toEqual(DATE_2_FRIDAY);
+
+        // closest=true
+        expect(days.get_last_draw_date(DATE_2_MONDAY, true)).toEqual(DATE_1_FRIDAY);
+        expect(days.get_last_draw_date(DATE_2_TUESDAY, true)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_last_draw_date(DATE_2_WEDNESDAY, true)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_last_draw_date(DATE_2_THURSDAY, true)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_last_draw_date(DATE_2_FRIDAY, true)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_last_draw_date(DATE_2_SATURDAY, true)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_last_draw_date(DATE_2_SUNDAY, true)).toEqual(DATE_2_FRIDAY);
+    });
+
+    it('get_next_draw_date returns correct dates', () => {
+        const days = new DrawDays([Weekday.TUESDAY, Weekday.FRIDAY]);
+        // closest=false
+        expect(days.get_next_draw_date(DATE_2_MONDAY, false)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_next_draw_date(DATE_2_TUESDAY, false)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_next_draw_date(DATE_2_WEDNESDAY, false)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_next_draw_date(DATE_2_THURSDAY, false)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_next_draw_date(DATE_2_FRIDAY, false)).toEqual(DATE_3_TUESDAY);
+        expect(days.get_next_draw_date(DATE_2_SATURDAY, false)).toEqual(DATE_3_TUESDAY);
+        expect(days.get_next_draw_date(DATE_2_SUNDAY, false)).toEqual(DATE_3_TUESDAY);
+
+        // closest=true
+        expect(days.get_next_draw_date(DATE_2_MONDAY, true)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_next_draw_date(DATE_2_TUESDAY, true)).toEqual(DATE_2_TUESDAY);
+        expect(days.get_next_draw_date(DATE_2_WEDNESDAY, true)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_next_draw_date(DATE_2_THURSDAY, true)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_next_draw_date(DATE_2_FRIDAY, true)).toEqual(DATE_2_FRIDAY);
+        expect(days.get_next_draw_date(DATE_2_SATURDAY, true)).toEqual(DATE_3_TUESDAY);
+        expect(days.get_next_draw_date(DATE_2_SUNDAY, true)).toEqual(DATE_3_TUESDAY);
+    });
+
+    it('null input behaves like default; Weekday input throws', () => {
+        const days = new DrawDays([Weekday.MONDAY]);
+        vi.useFakeTimers();
+        vi.setSystemTime(new Date(2024, 0, 1)); // Monday
+
+        const ymd = (d: Date) => [d.getFullYear(), d.getMonth(), d.getDate()];
+
+        // null should behave like default (today)
+        expect(ymd(days.get_last_draw_date(null, true))).toEqual([2024, 0, 1]);
+        expect(ymd(days.get_next_draw_date(null, true))).toEqual([2024, 0, 1]);
+
+        // providing a Weekday should raise, mirroring Python's TypeError
+        expect(() => days.get_last_draw_date(Weekday.MONDAY, true)).toThrow(TypeError);
+        expect(() => days.get_next_draw_date(Weekday.MONDAY, true)).toThrow(TypeError);
+    });
+
+    it('days getter copies array', () => {
+        const dd = new DrawDays([Weekday.MONDAY]);
+        const arr = dd.days;
+        expect(arr).toEqual([Weekday.MONDAY]);
+        // mutate a copy to ensure original remains unchanged
+        const arrCopy = [...arr] as Weekday[];
+        arrCopy.push(Weekday.TUESDAY);
+        expect(dd.days).toEqual([Weekday.MONDAY]);
     });
 });

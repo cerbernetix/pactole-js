@@ -504,3 +504,89 @@ export class Weekday {
         return DAY_NAMES[this.value].toUpperCase();
     }
 }
+
+/**
+ * Helper for lotteries to compute last/next draw dates given a set of weekday
+ * draw days.
+ *
+ * The constructor accepts any iterable of weekday values; methods take the
+ * same loose inputs as `Weekday` (including `Date`/timestamp) and return
+ * `Date` objects.  However, supplying a `Weekday` instance as the
+ * `from_date` parameter is not allowed and will raise a `TypeError`.
+ *
+ * @param days - iterable of weekday inputs defining the draw schedule.
+ *
+ * @example
+ * ```ts
+ * const draws = new DrawDays([Weekday.MONDAY, Weekday.THURSDAY]);
+ * draws.get_last_draw_date(new Date(2024, 5, 5)); // 2024-06-03
+ * draws.get_next_draw_date("2024-06-05");        // 2024-06-06
+ * ```
+ */
+export class DrawDays {
+    private readonly _days: Weekday[];
+
+    constructor(days: Iterable<DayInput | Weekday>) {
+        this._days = Array.from(days, d => Weekday.get_day(d));
+    }
+
+    /**
+     * Read-only array of the configured draw weekdays.
+     */
+    get days(): readonly Weekday[] {
+        return [...this._days];
+    }
+
+    /**
+     * Return the most recent draw date on or before `from_date`.
+     *
+     * The input is coerced via {@link Weekday.get_date}, so the same variety of
+     * strings, timestamps and `Date` objects is accepted. Type/format errors
+     * will propagate from that helper.
+     *
+     * @param from_date - reference moment; when omitted uses today.
+     * @param closest - if `true` and `from_date` itself is a draw day, it is
+     *                  returned; otherwise the previous draw day is used.
+     * @returns a `Date` object occurring on one of the configured draw days.
+     * @throws TypeError/RangeError from {@link Weekday.get_date} on invalid
+     *         `from_date` input.  Passing a `Weekday` instance is *not*
+     *         considered a valid date and will therefore throw.
+     *
+     * @example
+     * ```ts
+     * const dd = new DrawDays([Weekday.MONDAY, Weekday.THURSDAY]);
+     * dd.get_last_draw_date("2024-06-05"); // 2024-06-03
+     * dd.get_last_draw_date(new Date(2024, 5, 6)); // same day if closest
+     * ```
+     */
+    get_last_draw_date(from_date: DayInput | Weekday | null = null, closest = true): Date {
+        let day = Weekday.get_day(from_date as DayInput | Weekday | null);
+        if (!closest || !this._days.includes(day)) {
+            day = day.previous(this._days);
+        }
+        return day.previous_date(from_date as DayInput | null, closest);
+    }
+
+    /**
+     * Return the next draw date on or after `from_date`.
+     *
+     * Parameters mirror {@link get_last_draw_date}.
+     *
+     * @throws TypeError/RangeError from {@link Weekday.get_date} on invalid
+     *         `from_date` input.  Passing a `Weekday` instance is *not*
+     *         considered a valid date and will therefore throw.
+     *
+     * @example
+     * ```ts
+     * const dd = new DrawDays([Weekday.MONDAY, Weekday.THURSDAY]);
+     * dd.get_next_draw_date("2024-06-05"); // 2024-06-06
+     * ```
+     */
+    get_next_draw_date(from_date: DayInput | Weekday | null = null, closest = true): Date {
+        let day = Weekday.get_day(from_date as DayInput | Weekday | null);
+        if (!closest || !this._days.includes(day)) {
+            day = day.next(this._days);
+        }
+        return day.next_date(from_date as DayInput | null, closest);
+    }
+}
