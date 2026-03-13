@@ -1,6 +1,6 @@
 {
     "name": "pactole-js",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "license": "MIT",
     "displayName": "Pactole.js",
     "description": "A TypeScript library for managing lottery results.",
