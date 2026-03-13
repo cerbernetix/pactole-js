@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
     EUROMILLIONS_STAR_COMBINATIONS,
@@ -6,6 +6,11 @@ import {
     EuroMillionsCombination,
     getCombinationRank
 } from 'src/combinations/index.ts';
+
+const toRandomForInt = (target: number, min: number, max: number): number => {
+    const span = max - min + 1;
+    return (target - min + 0.5) / span;
+};
 
 describe('EuroMillionsCombination', () => {
     it('starts empty and exposes constants', () => {
@@ -84,6 +89,62 @@ describe('EuroMillionsCombination', () => {
         expect(combination.generate({ n: 4, partitions: 2 })).toHaveLength(4);
     });
 
+    it('generate() returns deterministic combinations when random is seeded', () => {
+        const combination = new EuroMillionsCombination();
+        const partition1 = combination.combinations;
+        const partition2 = Math.ceil(partition1 / 2);
+        const partition3 = Math.ceil(partition1 / 3);
+
+        // Mirrors Python 0.2.0 deterministic test seed sequence.
+        const ranks = [
+            29885207, 6713773, 73827621, 16434414, 61592139, 102589671, 13756669, 81587812, 56629388, 74184879
+        ];
+
+        const randomValues = [
+            // generate() => partitions=1
+            toRandomForInt(ranks[0], 0, partition1 - 1),
+            // generate(2) => partitions=1
+            toRandomForInt(ranks[1], 0, partition1 - 1),
+            toRandomForInt(ranks[2], 0, partition1 - 1),
+            // generate(3, partitions=3)
+            toRandomForInt(ranks[3], partition3 * 0, partition3 * 1 - 1),
+            toRandomForInt(ranks[4], partition3 * 1, partition3 * 2 - 1),
+            toRandomForInt(ranks[5], partition3 * 2, partition3 * 3 - 1),
+            // generate(4, partitions=2)
+            toRandomForInt(ranks[6], partition2 * 0, partition2 * 1 - 1),
+            toRandomForInt(ranks[7], partition2 * 1, partition2 * 2 - 1),
+            toRandomForInt(ranks[8], partition2 * 0, partition2 * 1 - 1),
+            toRandomForInt(ranks[9], partition2 * 1, partition2 * 2 - 1)
+        ];
+
+        const randomSpy = vi.spyOn(Math, 'random').mockImplementation(() => randomValues.shift() ?? 0);
+        try {
+            const generated1 = combination.generate();
+            expect(generated1).toHaveLength(1);
+            expect(generated1[0]?.rank).toBe(ranks[0]);
+
+            const generated2 = combination.generate({ n: 2 });
+            expect(generated2).toHaveLength(2);
+            expect(generated2[0]?.rank).toBe(ranks[1]);
+            expect(generated2[1]?.rank).toBe(ranks[2]);
+
+            const generated3 = combination.generate({ n: 3, partitions: 3 });
+            expect(generated3).toHaveLength(3);
+            expect(generated3[0]?.rank).toBe(ranks[3]);
+            expect(generated3[1]?.rank).toBe(ranks[4]);
+            expect(generated3[2]?.rank).toBe(ranks[5]);
+
+            const generated4 = combination.generate({ n: 4, partitions: 2 });
+            expect(generated4).toHaveLength(4);
+            expect(generated4[0]?.rank).toBe(ranks[6]);
+            expect(generated4[1]?.rank).toBe(ranks[7]);
+            expect(generated4[2]?.rank).toBe(ranks[8]);
+            expect(generated4[3]?.rank).toBe(ranks[9]);
+        } finally {
+            randomSpy.mockRestore();
+        }
+    });
+
     it('copy/getCombination retains subclass type and allows overrides', () => {
         const base = new EuroMillionsCombination({ numbers: [1, 2, 3, 4, 5], stars: [6, 7] });
         const copy = base.copy();
@@ -120,7 +181,17 @@ describe('EuroMillionsCombination', () => {
 
             expect(combination.getWinningRank({ components: { numbers, stars } })).toBe(expected);
             expect(combination.getWinningRank({ combination: null, components: { numbers, stars } })).toBe(expected);
+
+            const combinationValues = numbers.concat(stars);
+            // Only validate the flat-combination input when it includes all required values.
+            if (m === 5 && s === 2) {
+                expect(combination.getWinningRank({ combination: combinationValues })).toBe(expected);
+            }
         }
+
+        expect(() => combination.getWinningRank({ components: { extra: [1] as unknown as number[] } })).toThrow(
+            'Component "extra" does not exist in the combination.'
+        );
     });
 
     it('support equality, includes, intersects, intersection, compares and similarity', () => {
