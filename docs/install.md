@@ -1,22 +1,47 @@
 # Installation
 
-```bash
-npm i pactole-js
-```
+Pactole.js is a TypeScript library for managing lottery results.
 
 ## Requirements
 
-- Node.js >= 20 (LTS recommended)
-- npm or a compatible package manager
+Pactole.js requires Node.js 20 or newer.
 
-Install from source
+The dependencies are managed by `npm`.
 
-Clone the repository and install dependencies:
+## Install the package
 
-```bash
+Install the published package with `npm`:
+
+```sh
+npm install pactole-js
+```
+
+## Install from source
+
+To install the latest source version directly from GitHub:
+
+```sh
+npm install git+https://github.com/cerbernetix/pactole-js.git
+```
+
+## Development setup
+
+Clone the repository:
+
+```sh
 git clone https://github.com/cerbernetix/pactole-js.git
 cd pactole-js
-npm i
+npm install
+```
+
+`npm install` installs runtime and development dependencies by default.
+
+## Optional: runtime-only environment
+
+If you only need runtime dependencies, omit development dependencies:
+
+```sh
+npm install --omit=dev
 ```
 
 ## Development
