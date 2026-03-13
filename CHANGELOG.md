@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## v0.2.0 [2026-03-13]
+
 ### Added
 
 - Implemented lottery classes: `BaseLottery`, `EuroMillions`, and `EuroDreams`.
