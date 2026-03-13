@@ -6,7 +6,7 @@
 
 > **comb**(`n`, `k`): `number`
 
-Defined in: [combinations/rank.ts:34](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/rank.ts#L34)
+Defined in: [combinations/rank.ts:34](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/rank.ts#L34)
 
 Cached computation of the binomial coefficient (`n` choose `k`).
 

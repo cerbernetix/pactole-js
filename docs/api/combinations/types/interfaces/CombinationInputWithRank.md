@@ -4,7 +4,7 @@
 
 # Interface: CombinationInputWithRank
 
-Defined in: [combinations/types.ts:9](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/types.ts#L9)
+Defined in: [combinations/types.ts:9](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/types.ts#L9)
 
 ## Properties
 
@@ -12,7 +12,7 @@ Defined in: [combinations/types.ts:9](https://github.com/cerbernetix/pactole-js/
 
 > `optional` **rank**: `number` \| `null`
 
-Defined in: [combinations/types.ts:11](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/types.ts#L11)
+Defined in: [combinations/types.ts:11](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/types.ts#L11)
 
 ***
 
@@ -20,4 +20,4 @@ Defined in: [combinations/types.ts:11](https://github.com/cerbernetix/pactole-js
 
 > `optional` **values**: [`CombinationNumbers`](../type-aliases/CombinationNumbers.md) \| `null`
 
-Defined in: [combinations/types.ts:10](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/types.ts#L10)
+Defined in: [combinations/types.ts:10](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/types.ts#L10)

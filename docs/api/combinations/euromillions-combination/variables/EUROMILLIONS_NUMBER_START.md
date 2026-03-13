@@ -6,4 +6,4 @@
 
 > `const` **EUROMILLIONS\_NUMBER\_START**: `1` = `1`
 
-Defined in: [combinations/euromillions-combination.ts:7](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/euromillions-combination.ts#L7)
+Defined in: [combinations/euromillions-combination.ts:7](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/euromillions-combination.ts#L7)

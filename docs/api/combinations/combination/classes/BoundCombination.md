@@ -4,7 +4,7 @@
 
 # Class: BoundCombination
 
-Defined in: [combinations/combination.ts:471](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L471)
+Defined in: [combinations/combination.ts:471](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L471)
 
 A class representing a bound combination of values.
 
@@ -58,7 +58,7 @@ fixed.combinations; // 2118760
 
 > **new BoundCombination**(`values?`, `__namedParameters?`): `BoundCombination`
 
-Defined in: [combinations/combination.ts:478](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L478)
+Defined in: [combinations/combination.ts:478](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L478)
 
 #### Parameters
 
@@ -84,7 +84,7 @@ Defined in: [combinations/combination.ts:478](https://github.com/cerbernetix/pac
 
 > `protected` `readonly` **\_combinations**: `number`
 
-Defined in: [combinations/combination.ts:476](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L476)
+Defined in: [combinations/combination.ts:476](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L476)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [combinations/combination.ts:476](https://github.com/cerbernetix/pac
 
 > `protected` `readonly` **\_count**: `number`
 
-Defined in: [combinations/combination.ts:474](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L474)
+Defined in: [combinations/combination.ts:474](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L474)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [combinations/combination.ts:474](https://github.com/cerbernetix/pac
 
 > `protected` `readonly` **\_end**: `number`
 
-Defined in: [combinations/combination.ts:472](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L472)
+Defined in: [combinations/combination.ts:472](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L472)
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [combinations/combination.ts:472](https://github.com/cerbernetix/pac
 
 > `protected` **\_rank**: `number` \| `null`
 
-Defined in: [combinations/combination.ts:85](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L85)
+Defined in: [combinations/combination.ts:85](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L85)
 
 #### Inherited from
 
@@ -120,7 +120,7 @@ Defined in: [combinations/combination.ts:85](https://github.com/cerbernetix/pact
 
 > `protected` `readonly` **\_start**: `number`
 
-Defined in: [combinations/combination.ts:87](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L87)
+Defined in: [combinations/combination.ts:87](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L87)
 
 #### Inherited from
 
@@ -132,7 +132,7 @@ Defined in: [combinations/combination.ts:87](https://github.com/cerbernetix/pact
 
 > `protected` `readonly` **\_values**: `Set`\<`number`\>
 
-Defined in: [combinations/combination.ts:83](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L83)
+Defined in: [combinations/combination.ts:83](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L83)
 
 #### Inherited from
 
@@ -146,7 +146,7 @@ Defined in: [combinations/combination.ts:83](https://github.com/cerbernetix/pact
 
 > **get** **combinations**(): `number`
 
-Defined in: [combinations/combination.ts:560](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L560)
+Defined in: [combinations/combination.ts:560](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L560)
 
 Return the total number of possible combinations.
 
@@ -170,7 +170,7 @@ Total combinatorial space.
 
 > **get** **count**(): `number`
 
-Defined in: [combinations/combination.ts:548](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L548)
+Defined in: [combinations/combination.ts:548](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L548)
 
 Return the configured count of numbers in the combination.
 
@@ -194,7 +194,7 @@ Configured count.
 
 > **get** **end**(): `number`
 
-Defined in: [combinations/combination.ts:536](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L536)
+Defined in: [combinations/combination.ts:536](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L536)
 
 Return the end value of the combination range.
 
@@ -218,7 +218,7 @@ End bound.
 
 > **get** **length**(): `number`
 
-Defined in: [combinations/combination.ts:180](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L180)
+Defined in: [combinations/combination.ts:180](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L180)
 
 Get number of values.
 
@@ -246,7 +246,7 @@ Number of unique values in the combination.
 
 > **get** **rank**(): `number`
 
-Defined in: [combinations/combination.ts:155](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L155)
+Defined in: [combinations/combination.ts:155](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L155)
 
 Get lexicographic rank.
 
@@ -276,7 +276,7 @@ Lexicographic rank.
 
 > **get** **start**(): `number`
 
-Defined in: [combinations/combination.ts:192](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L192)
+Defined in: [combinations/combination.ts:192](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L192)
 
 Get the starting offset of the combination.
 
@@ -304,7 +304,7 @@ Start offset.
 
 > **get** **storedRank**(): `number` \| `null`
 
-Defined in: [combinations/combination.ts:168](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L168)
+Defined in: [combinations/combination.ts:168](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L168)
 
 Get the stored rank without triggering lazy rank computation.
 
@@ -326,7 +326,7 @@ Stored rank or `null` when it has not been set/computed yet.
 
 > **get** **values**(): [`CombinationValues`](../../types/type-aliases/CombinationValues.md)
 
-Defined in: [combinations/combination.ts:137](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L137)
+Defined in: [combinations/combination.ts:137](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L137)
 
 Get sorted combination values.
 
@@ -352,7 +352,7 @@ Sorted values.
 
 > **\[iterator\]**(): `Iterator`\<`number`\>
 
-Defined in: [combinations/combination.ts:444](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L444)
+Defined in: [combinations/combination.ts:444](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L444)
 
 #### Returns
 
@@ -368,7 +368,7 @@ Defined in: [combinations/combination.ts:444](https://github.com/cerbernetix/pac
 
 > **compares**(`combination`): `number`
 
-Defined in: [combinations/combination.ts:358](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L358)
+Defined in: [combinations/combination.ts:358](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L358)
 
 Compare this combination to another combination or rank.
 
@@ -402,7 +402,7 @@ new Combination([1, 2, 3]).compares([1, 2, 4]); // -1
 
 > **copy**(`values?`): `BoundCombination`
 
-Defined in: [combinations/combination.ts:594](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L594)
+Defined in: [combinations/combination.ts:594](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L594)
 
 Return a copy of the BoundCombination with optional modifications.
 
@@ -437,7 +437,7 @@ base.copy({ values: 15 }).values; // rank-derived bounded values
 
 > **equals**(`combination`): `boolean`
 
-Defined in: [combinations/combination.ts:257](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L257)
+Defined in: [combinations/combination.ts:257](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L257)
 
 Check whether this combination equals another combination or rank.
 
@@ -473,7 +473,7 @@ base.equals(0); // true
 
 > **generate**(`n?`): `BoundCombination`[]
 
-Defined in: [combinations/combination.ts:575](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L575)
+Defined in: [combinations/combination.ts:575](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L575)
 
 Generate random combinations within current bounds.
 
@@ -504,7 +504,7 @@ generated.length; // 2
 
 > **get**(`index`): `number`
 
-Defined in: [combinations/combination.ts:408](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L408)
+Defined in: [combinations/combination.ts:408](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L408)
 
 Get a value by index.
 
@@ -536,7 +536,7 @@ Thrown when index is out of bounds.
 
 > **getValues**(`start?`): [`CombinationValues`](../../types/type-aliases/CombinationValues.md)
 
-Defined in: [combinations/combination.ts:237](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L237)
+Defined in: [combinations/combination.ts:237](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L237)
 
 Get values with an optional start offset transformation.
 
@@ -570,7 +570,7 @@ new Combination([1, 2, 3]).getValues(0); // [0, 1, 2]
 
 > **hashCode**(): `number`
 
-Defined in: [combinations/combination.ts:424](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L424)
+Defined in: [combinations/combination.ts:424](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L424)
 
 Get an integer hash representation.
 
@@ -596,7 +596,7 @@ new Combination([1, 2, 3]).hashCode(); // 0
 
 > **includes**(`combination`): `boolean`
 
-Defined in: [combinations/combination.ts:292](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L292)
+Defined in: [combinations/combination.ts:292](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L292)
 
 Check whether this combination includes another combination or a value.
 
@@ -632,7 +632,7 @@ base.includes([2, 5]); // false
 
 > **intersection**(`combination`): [`Combination`](Combination.md)
 
-Defined in: [combinations/combination.ts:340](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L340)
+Defined in: [combinations/combination.ts:340](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L340)
 
 Get the intersection with another combination.
 
@@ -666,7 +666,7 @@ new Combination([1, 2, 3]).intersection([3, 4, 5]).values; // [3]
 
 > **intersects**(`combination`): `boolean`
 
-Defined in: [combinations/combination.ts:318](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L318)
+Defined in: [combinations/combination.ts:318](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L318)
 
 Check whether this combination intersects another combination.
 
@@ -700,7 +700,7 @@ new Combination([1, 2, 3]).intersects([3, 4]); // true
 
 > **similarity**(`combination`): `number`
 
-Defined in: [combinations/combination.ts:388](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L388)
+Defined in: [combinations/combination.ts:388](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L388)
 
 Calculate similarity ratio with another combination.
 
@@ -734,7 +734,7 @@ new Combination([1, 2, 3]).similarity([2, 3, 4]); // 0.666...
 
 > **toRepr**(): `string`
 
-Defined in: [combinations/combination.ts:656](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L656)
+Defined in: [combinations/combination.ts:656](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L656)
 
 Render string representation.
 
@@ -760,7 +760,7 @@ new BoundCombination([1, 2, 3], null, 1, 50, 5).toRepr();
 
 > **toString**(): `string`
 
-Defined in: [combinations/combination.ts:637](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L637)
+Defined in: [combinations/combination.ts:637](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L637)
 
 Render values with fixed-width formatting.
 
