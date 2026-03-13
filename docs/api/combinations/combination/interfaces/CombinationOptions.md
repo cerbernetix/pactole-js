@@ -4,7 +4,7 @@
 
 # Interface: CombinationOptions
 
-Defined in: [combinations/combination.ts:29](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L29)
+Defined in: [combinations/combination.ts:29](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L29)
 
 ## Properties
 
@@ -12,7 +12,7 @@ Defined in: [combinations/combination.ts:29](https://github.com/cerbernetix/pact
 
 > `optional` **rank**: `number` \| `null`
 
-Defined in: [combinations/combination.ts:30](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L30)
+Defined in: [combinations/combination.ts:30](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L30)
 
 ***
 
@@ -20,4 +20,4 @@ Defined in: [combinations/combination.ts:30](https://github.com/cerbernetix/pact
 
 > `optional` **start**: `number` \| `null`
 
-Defined in: [combinations/combination.ts:31](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/combination.ts#L31)
+Defined in: [combinations/combination.ts:31](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/combination.ts#L31)

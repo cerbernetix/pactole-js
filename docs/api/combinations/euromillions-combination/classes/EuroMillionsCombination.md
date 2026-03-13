@@ -4,7 +4,7 @@
 
 # Class: EuroMillionsCombination
 
-Defined in: [combinations/euromillions-combination.ts:68](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/euromillions-combination.ts#L68)
+Defined in: [combinations/euromillions-combination.ts:68](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/euromillions-combination.ts#L68)
 
 Preconfigured EuroMillions lottery combination.
 
@@ -42,7 +42,7 @@ comb.stars.toString();
 
 > **new EuroMillionsCombination**(`__namedParameters?`): `EuroMillionsCombination`
 
-Defined in: [combinations/euromillions-combination.ts:72](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/euromillions-combination.ts#L72)
+Defined in: [combinations/euromillions-combination.ts:72](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/euromillions-combination.ts#L72)
 
 #### Parameters
 
@@ -64,7 +64,7 @@ Defined in: [combinations/euromillions-combination.ts:72](https://github.com/cer
 
 > `readonly` **numbers**: [`BoundCombination`](../../combination/classes/BoundCombination.md)
 
-Defined in: [combinations/euromillions-combination.ts:69](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/euromillions-combination.ts#L69)
+Defined in: [combinations/euromillions-combination.ts:69](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/euromillions-combination.ts#L69)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [combinations/euromillions-combination.ts:69](https://github.com/cer
 
 > `readonly` **stars**: [`BoundCombination`](../../combination/classes/BoundCombination.md)
 
-Defined in: [combinations/euromillions-combination.ts:70](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/euromillions-combination.ts#L70)
+Defined in: [combinations/euromillions-combination.ts:70](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/euromillions-combination.ts#L70)
 
 ## Accessors
 
@@ -82,7 +82,7 @@ Defined in: [combinations/euromillions-combination.ts:70](https://github.com/cer
 
 > **get** **combinations**(): `number`
 
-Defined in: [combinations/lottery-combination.ts:217](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L217)
+Defined in: [combinations/lottery-combination.ts:217](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L217)
 
 Get total number of possible combinations.
 
@@ -110,7 +110,7 @@ Product of component combinations or `0` for empty lottery.
 
 > **get** **components**(): [`CombinationComponents`](../../lottery-combination/type-aliases/CombinationComponents.md)
 
-Defined in: [combinations/lottery-combination.ts:135](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L135)
+Defined in: [combinations/lottery-combination.ts:135](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L135)
 
 Get a copy of component mapping.
 
@@ -139,7 +139,7 @@ Shallow copy of component map.
 
 > **get** **count**(): `number`
 
-Defined in: [combinations/lottery-combination.ts:205](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L205)
+Defined in: [combinations/lottery-combination.ts:205](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L205)
 
 Get configured component total count.
 
@@ -169,7 +169,7 @@ Sum of configured component counts.
 
 > **get** **length**(): `number`
 
-Defined in: [combinations/lottery-combination.ts:191](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L191)
+Defined in: [combinations/lottery-combination.ts:191](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L191)
 
 Get flattened value length.
 
@@ -199,7 +199,7 @@ Number of selected values across components.
 
 > **get** **maxWinningRank**(): `number` \| `null`
 
-Defined in: [combinations/lottery-combination.ts:281](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L281)
+Defined in: [combinations/lottery-combination.ts:281](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L281)
 
 Get maximum winning rank.
 
@@ -227,7 +227,7 @@ Maximum winning rank or `null`.
 
 > **get** **minWinningRank**(): `number` \| `null`
 
-Defined in: [combinations/lottery-combination.ts:264](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L264)
+Defined in: [combinations/lottery-combination.ts:264](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L264)
 
 Get minimum winning rank.
 
@@ -255,7 +255,7 @@ Minimum winning rank or `null`.
 
 > **get** **nbWinningRanks**(): `number`
 
-Defined in: [combinations/lottery-combination.ts:247](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L247)
+Defined in: [combinations/lottery-combination.ts:247](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L247)
 
 Get winning-rank span length.
 
@@ -283,7 +283,7 @@ Span length between min and max rank values (inclusive).
 
 > **get** **rank**(): `number`
 
-Defined in: [combinations/lottery-combination.ts:163](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L163)
+Defined in: [combinations/lottery-combination.ts:163](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L163)
 
 Get mixed rank of all components.
 
@@ -313,7 +313,7 @@ Combined rank.
 
 > **get** **values**(): [`CombinationValues`](../../types/type-aliases/CombinationValues.md)
 
-Defined in: [combinations/lottery-combination.ts:149](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L149)
+Defined in: [combinations/lottery-combination.ts:149](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L149)
 
 Get flattened values of all components in declaration order.
 
@@ -343,7 +343,7 @@ Flattened values.
 
 > **get** **winningRanks**(): [`CombinationWinningRanks`](../../lottery-combination/type-aliases/CombinationWinningRanks.md)
 
-Defined in: [combinations/lottery-combination.ts:235](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L235)
+Defined in: [combinations/lottery-combination.ts:235](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L235)
 
 Get a copy of winning-rank mapping.
 
@@ -370,7 +370,7 @@ Winning-rank map copy.
 
 > **\[iterator\]**(): `Iterator`\<`number`\>
 
-Defined in: [combinations/lottery-combination.ts:792](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L792)
+Defined in: [combinations/lottery-combination.ts:792](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L792)
 
 #### Returns
 
@@ -386,7 +386,7 @@ Defined in: [combinations/lottery-combination.ts:792](https://github.com/cerbern
 
 > `protected` **buildComponents**(`components`): [`CombinationComponents`](../../lottery-combination/type-aliases/CombinationComponents.md)
 
-Defined in: [combinations/lottery-combination.ts:802](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L802)
+Defined in: [combinations/lottery-combination.ts:802](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L802)
 
 Build a mapped `CombinationComponents` object from a components payload.
 
@@ -413,7 +413,7 @@ are turned into `BoundCombination` instances.
 
 > **compares**(`combination?`): `number`
 
-Defined in: [combinations/lottery-combination.ts:642](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L642)
+Defined in: [combinations/lottery-combination.ts:642](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L642)
 
 Compare with another input.
 
@@ -453,7 +453,7 @@ lottery.compares({ combination: [1, 2, 3, 4, 6] }); // -1
 
 > **copy**(`winningRanks?`): `this`
 
-Defined in: [combinations/lottery-combination.ts:353](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L353)
+Defined in: [combinations/lottery-combination.ts:353](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L353)
 
 Copy this combination with optional overrides.
 
@@ -489,7 +489,7 @@ base.copy({ winningRanks: { '4': 2 } }).winningRanks; // { '4': 2 }
 
 > `protected` **createCombination**(`components`, `_winningRanks`): `this`
 
-Defined in: [combinations/euromillions-combination.ts:112](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/euromillions-combination.ts#L112)
+Defined in: [combinations/euromillions-combination.ts:112](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/euromillions-combination.ts#L112)
 
 Create a new `LotteryCombination` instance. Made `protected` so subclasses
 can override instance creation behavior while reusing `buildComponents`.
@@ -518,7 +518,7 @@ can override instance creation behavior while reusing `buildComponents`.
 
 > **equals**(`combination?`): `boolean`
 
-Defined in: [combinations/lottery-combination.ts:515](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L515)
+Defined in: [combinations/lottery-combination.ts:515](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L515)
 
 Test equality with another input.
 
@@ -559,7 +559,7 @@ a.equals(b); // true
 
 > **generate**(`n?`): `EuroMillionsCombination`[]
 
-Defined in: [combinations/lottery-combination.ts:334](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L334)
+Defined in: [combinations/lottery-combination.ts:334](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L334)
 
 Generate random combinations with the same component schema.
 
@@ -595,7 +595,7 @@ new LotteryCombination({ components: { numbers, stars } }).generate({ n: 2 }).le
 
 > **get**(`index`): `number`
 
-Defined in: [combinations/lottery-combination.ts:733](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L733)
+Defined in: [combinations/lottery-combination.ts:733](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L733)
 
 Get a value by flattened index.
 
@@ -627,7 +627,7 @@ Thrown when index is out of bounds.
 
 > **getCombination**(`combination?`): `this`
 
-Defined in: [combinations/lottery-combination.ts:379](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L379)
+Defined in: [combinations/lottery-combination.ts:379](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L379)
 
 Build a combination from rank, values, or another lottery combination.
 
@@ -668,7 +668,7 @@ lottery.getCombination({ combination: [1, 2, 3, 4, 5, 1, 2] }).values; // [1, 2,
 
 > **getComponent**(`name`): [`BoundCombination`](../../combination/classes/BoundCombination.md) \| `null`
 
-Defined in: [combinations/lottery-combination.ts:462](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L462)
+Defined in: [combinations/lottery-combination.ts:462](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L462)
 
 Get a component by name.
 
@@ -704,7 +704,7 @@ lottery.getComponent('stars'); // null
 
 > **getComponents**(`components?`): [`CombinationComponents`](../../lottery-combination/type-aliases/CombinationComponents.md)
 
-Defined in: [combinations/lottery-combination.ts:436](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L436)
+Defined in: [combinations/lottery-combination.ts:436](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L436)
 
 Build updated components for known component names.
 
@@ -744,7 +744,7 @@ lottery.getComponents({ numbers: [1, 2, 3, 4, 5] }).numbers.values;
 
 > **getComponentValues**(`name`): [`CombinationValues`](../../types/type-aliases/CombinationValues.md)
 
-Defined in: [combinations/lottery-combination.ts:476](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L476)
+Defined in: [combinations/lottery-combination.ts:476](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L476)
 
 Get values for a specific component.
 
@@ -779,7 +779,7 @@ lottery.getComponentValues('numbers'); // [1, 2, 3, 4, 5]
 
 > **getWinningRank**(`combination?`): `number` \| `null`
 
-Defined in: [combinations/lottery-combination.ts:495](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L495)
+Defined in: [combinations/lottery-combination.ts:495](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L495)
 
 Get winning rank against a candidate winning combination.
 
@@ -821,7 +821,7 @@ lottery.getWinningRank({ combination: [1, 2, 3, 4, 5, 1, 2] }); // 1
 
 > **has**(`value`): `boolean`
 
-Defined in: [combinations/lottery-combination.ts:752](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L752)
+Defined in: [combinations/lottery-combination.ts:752](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L752)
 
 Check scalar containment in flattened values.
 
@@ -856,7 +856,7 @@ new LotteryCombination({ components: { numbers } }).has(3); // true
 
 > **hashCode**(): `number`
 
-Defined in: [combinations/lottery-combination.ts:765](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L765)
+Defined in: [combinations/lottery-combination.ts:765](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L765)
 
 Get integer hash representation.
 
@@ -883,7 +883,7 @@ new LotteryCombination({ components: { numbers } }).hashCode();
 
 > **includes**(`combination?`): `boolean`
 
-Defined in: [combinations/lottery-combination.ts:552](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L552)
+Defined in: [combinations/lottery-combination.ts:552](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L552)
 
 Test inclusion of another input.
 
@@ -923,7 +923,7 @@ lottery.includes({ combination: 3 }); // true
 
 > **intersection**(`combination?`): [`LotteryCombination`](../../lottery-combination/classes/LotteryCombination.md)
 
-Defined in: [combinations/lottery-combination.ts:609](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L609)
+Defined in: [combinations/lottery-combination.ts:609](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L609)
 
 Get intersection with another input.
 
@@ -963,7 +963,7 @@ lottery.intersection({ combination: [4, 5] }).values; // [4, 5]
 
 > **intersects**(`combination?`): `boolean`
 
-Defined in: [combinations/lottery-combination.ts:584](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L584)
+Defined in: [combinations/lottery-combination.ts:584](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L584)
 
 Test intersection with another input.
 
@@ -1003,7 +1003,7 @@ lottery.intersects({ combination: [5] }); // true
 
 > **similarity**(`combination?`): `number`
 
-Defined in: [combinations/lottery-combination.ts:681](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L681)
+Defined in: [combinations/lottery-combination.ts:681](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L681)
 
 Compute similarity ratio in `[0, 1]`.
 
@@ -1043,7 +1043,7 @@ lottery.similarity({ combination: [1, 2, 8, 9, 10] }); // 0.4
 
 > **toRepr**(): `string`
 
-Defined in: [combinations/euromillions-combination.ts:130](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/euromillions-combination.ts#L130)
+Defined in: [combinations/euromillions-combination.ts:130](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/euromillions-combination.ts#L130)
 
 Return a string representation.
 
@@ -1063,7 +1063,7 @@ Representation string.
 
 > **toString**(): `string`
 
-Defined in: [combinations/lottery-combination.ts:786](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L786)
+Defined in: [combinations/lottery-combination.ts:786](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L786)
 
 #### Returns
 
@@ -1079,7 +1079,7 @@ Defined in: [combinations/lottery-combination.ts:786](https://github.com/cerbern
 
 > `static` **getCombinationFactory**(`combinationFactory`): (`options?`) => [`LotteryCombination`](../../lottery-combination/classes/LotteryCombination.md)
 
-Defined in: [combinations/lottery-combination.ts:303](https://github.com/cerbernetix/pactole-js/blob/28397dfe88db477d694f619975c7d4cd2ebe6d3f/src/combinations/lottery-combination.ts#L303)
+Defined in: [combinations/lottery-combination.ts:303](https://github.com/cerbernetix/pactole-js/blob/3256e82e2980c5101bbcdc138c2146981a483fd1/src/combinations/lottery-combination.ts#L303)
 
 Normalize a factory input.
 

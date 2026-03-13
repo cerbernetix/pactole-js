@@ -2,7 +2,11 @@
 
 A TypeScript library for managing lottery results.
 
+> A Python version is also available: [pactole](https://github.com/cerbernetix/pactole).
+
 ## Installation
+
+Add `pactole-js` to your project:
 
 ```sh
 npm install pactole-js
@@ -10,7 +14,7 @@ npm install pactole-js
 
 ## Documentation
 
-See the complete documentation index: [Documentation](https://cerbernetix.github.io/pactole-js/).
+See the complete documentation index: [Documentation](https://cerbernetix.github.io/pactole-js/). It's also published on ReadTheDocs: [pactole-js.readthedocs.io](https://pactole-js.readthedocs.io/en/latest/).
 
 ## Requirements
 
@@ -18,41 +22,53 @@ Requires **`Node.js`** (version `20` or newer).
 
 ## Usage
 
-```typescript
-import { Combination } from 'pactole-js';
+```ts
+import * as pactole from 'pactole-js';
 ```
 
-### EuroMillions combinations
+### EuroMillions lottery
 
-```typescript
-import { EuroMillionsCombination } from 'pactole-js';
+```ts
+import { EuroMillions } from 'pactole-js';
 
-// Build a known combination
-const euroMillions = new EuroMillionsCombination({ numbers: [3, 15, 22, 28, 44], stars: [2, 9] });
+const lottery = new EuroMillions();
 
-console.log(euroMillions.numbers.values);
-console.log(euroMillions.stars.values);
-console.log(euroMillions.rank);
+// Build a known ticket
+const ticket = lottery.getCombination({ numbers: [3, 15, 22, 28, 44], stars: [2, 9] });
+
+console.log(lottery.drawDays.days);
+console.log(lottery.getLastDrawDate(new Date(2026, 1, 19)));
+console.log(lottery.getNextDrawDate(new Date(2026, 1, 19)));
+console.log(lottery.getNextDrawDate()); // From today
+console.log(ticket.numbers.values);
+console.log(ticket.stars.values);
+console.log(ticket.rank);
 
 // Generate 3 random combinations
-const combinations = new EuroMillionsCombination().generate({ n: 3 });
+const combinations = lottery.generate({ n: 3 });
 console.log(combinations);
 ```
 
-### EuroDreams combinations
+### EuroDreams lottery
 
-```typescript
-import { EuroDreamsCombination } from 'pactole-js';
+```ts
+import { EuroDreams } from 'pactole-js';
 
-// Build a known combination
-const euroDreams = new EuroDreamsCombination({ numbers: [2, 3, 5, 7, 9, 38], dream: [3] });
+const lottery = new EuroDreams();
 
-console.log(euroDreams.numbers.values);
-console.log(euroDreams.dream.values);
-console.log(euroDreams.rank);
+// Build a known ticket
+const ticket = lottery.getCombination({ numbers: [2, 3, 5, 7, 9, 38], dream: [3] });
+
+console.log(lottery.drawDays.days);
+console.log(lottery.getLastDrawDate(new Date(2026, 1, 19)));
+console.log(lottery.getNextDrawDate(new Date(2026, 1, 19)));
+console.log(lottery.getNextDrawDate()); // From today
+console.log(ticket.numbers.values);
+console.log(ticket.dream.values);
+console.log(ticket.rank);
 
 // Generate 3 random combinations
-const combinations = new EuroDreamsCombination().generate({ n: 3 });
+const combinations = lottery.generate({ n: 3 });
 console.log(combinations);
 ```
 
@@ -75,8 +91,8 @@ console.log(combinations);
 
 ## Changes
 
-For the changelog, see [CHANGELOG.md](CHANGELOG.md).
+For the changelog, see [CHANGELOG.md](https://github.com/cerbernetix/pactole-js/blob/main/CHANGELOG.md).
 
 ## License
 
-MIT License - See LICENSE file for details.
+MIT License - See [LICENSE](https://github.com/cerbernetix/pactole-js/blob/main/LICENSE) file for details.

@@ -6,6 +6,18 @@
 
 ## References
 
+### BaseLottery
+
+Re-exports [BaseLottery](../lottery/base-lottery/classes/BaseLottery.md)
+
+***
+
+### BaseLotteryOptions
+
+Re-exports [BaseLotteryOptions](../lottery/base-lottery/interfaces/BaseLotteryOptions.md)
+
+***
+
 ### BoundCombination
 
 Re-exports [BoundCombination](../combinations/combination/classes/BoundCombination.md)
@@ -132,6 +144,24 @@ Re-exports [createWinningRanks](../combinations/lottery-combination/functions/cr
 
 ***
 
+### DayInput
+
+Re-exports [DayInput](../utils/days/type-aliases/DayInput.md)
+
+***
+
+### DrawDays
+
+Re-exports [DrawDays](../utils/days/classes/DrawDays.md)
+
+***
+
+### EuroDreams
+
+Re-exports [EuroDreams](../lottery/eurodreams/classes/EuroDreams.md)
+
+***
+
 ### EURODREAMS\_DREAM\_COMBINATIONS
 
 Re-exports [EURODREAMS_DREAM_COMBINATIONS](../combinations/eurodreams-combination/variables/EURODREAMS_DREAM_COMBINATIONS.md)
@@ -201,6 +231,12 @@ Re-exports [EuroDreamsCombination](../combinations/eurodreams-combination/classe
 ### EuroDreamsCombinationOptions
 
 Re-exports [EuroDreamsCombinationOptions](../combinations/eurodreams-combination/interfaces/EuroDreamsCombinationOptions.md)
+
+***
+
+### EuroMillions
+
+Re-exports [EuroMillions](../lottery/euromillions/classes/EuroMillions.md)
 
 ***
 
@@ -333,3 +369,9 @@ Re-exports [LotteryCombinationMatchOptions](../combinations/lottery-combination/
 ### LotteryCombinationOptions
 
 Re-exports [LotteryCombinationOptions](../combinations/lottery-combination/interfaces/LotteryCombinationOptions.md)
+
+***
+
+### Weekday
+
+Re-exports [Weekday](../utils/days/classes/Weekday.md)
