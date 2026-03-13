@@ -1,4 +1,4 @@
-# Combinations Usage
+# Combinations
 
 Pactole.js exposes dedicated classes to represent and manipulate lottery combinations:
 
@@ -9,16 +9,16 @@ Pactole.js exposes dedicated classes to represent and manipulate lottery combina
 
 Create combinations from explicit component values.
 
-```typescript
+```ts
 import { EuroDreamsCombination, EuroMillionsCombination } from 'pactole-js';
 
 const euromillions = new EuroMillionsCombination({ numbers: [3, 15, 22, 28, 44], stars: [2, 9] });
 const eurodreams = new EuroDreamsCombination({ numbers: [2, 3, 5, 7, 9, 38], dream: [3] });
 ```
 
-You can also pass a flat array. Values are split automatically by component size.
+You can also pass a flat sequence. Values are split automatically by component size.
 
-```typescript
+```ts
 import { EuroDreamsCombination, EuroMillionsCombination } from 'pactole-js';
 
 const euromillions = new EuroMillionsCombination([3, 15, 22, 28, 44, 2, 9]);
@@ -27,7 +27,7 @@ const eurodreams = new EuroDreamsCombination([2, 3, 5, 7, 9, 38, 3]);
 
 Create combinations from lexicographic rank values (per component).
 
-```typescript
+```ts
 import { EuroDreamsCombination, EuroMillionsCombination } from 'pactole-js';
 
 const firstEuromillions = new EuroMillionsCombination({ numbers: 0, stars: 0 });
@@ -38,7 +38,7 @@ const firstEurodreams = new EuroDreamsCombination({ numbers: 0, dream: 0 });
 
 Each combination exposes normalized component values and computed metadata.
 
-```typescript
+```ts
 import { EuroMillionsCombination } from 'pactole-js';
 
 const combination = new EuroMillionsCombination({ numbers: [44, 3, 28, 22, 15], stars: [9, 2] });
@@ -56,14 +56,14 @@ console.log(combination.maxWinningRank); // Worst winning rank value
 
 Use `generate({ n })` to produce combinations with the same game rules.
 
-```typescript
+```ts
 import { EuroDreamsCombination } from 'pactole-js';
 
 const template = new EuroDreamsCombination();
 const generated = template.generate({ n: 3 });
 
 for (const combination of generated) {
-    console.log(combination.values);
+    console.log(combination);
 }
 ```
 
@@ -71,24 +71,23 @@ for (const combination of generated) {
 
 The classes provide direct comparison and set-like operations.
 
-```typescript
+```ts
 import { EuroMillionsCombination } from 'pactole-js';
 
 const reference = new EuroMillionsCombination({ numbers: [3, 15, 22, 28, 44], stars: [2, 9] });
 const candidate = new EuroMillionsCombination({ numbers: [3, 15, 22, 30, 45], stars: [2, 10] });
 
-console.log(reference.equals({ combination: candidate }));
+console.log(reference.equals(candidate));
 console.log(reference.includes({ components: { numbers: [3, 15, 22], stars: [2] } }));
 console.log(reference.intersects({ combination: candidate }));
-const intersected = reference.intersection({ combination: candidate }) as EuroMillionsCombination;
-console.log(intersected.numbers.values);
+console.log(reference.intersection({ combination: candidate }).numbers.values);
 ```
 
 ## Compute winning ranks
 
 Evaluate a played combination against a reference draw combination with `getWinningRank`.
 
-```typescript
+```ts
 import { EuroMillionsCombination } from 'pactole-js';
 
 const draw = new EuroMillionsCombination({ numbers: [3, 15, 22, 28, 44], stars: [2, 9] });
@@ -97,3 +96,8 @@ const ticket = new EuroMillionsCombination({ numbers: [3, 15, 22, 30, 45], stars
 const rank = draw.getWinningRank({ combination: ticket });
 console.log(rank); // number rank value, or null if not winning
 ```
+
+## Notes
+
+- All APIs are synchronous unless otherwise documented. Random generation uses the library RNG helpers and accepts optional partitioning for rank-based sampling.
+- Use the `copy()` family when you need to adjust `start`, `end`, or `count` while preserving other configuration values.
