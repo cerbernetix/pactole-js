@@ -1,4 +1,4 @@
-import { DrawDays, Weekday, type DayInput } from 'src/utils/days';
+import { DrawDays, Weekday, type DayInput } from 'src/utils/index.ts';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 // helpers for timestamps (seconds since epoch).  We add a tiny

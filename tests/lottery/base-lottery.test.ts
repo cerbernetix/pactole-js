@@ -1,7 +1,6 @@
-import { BoundCombination } from 'src/combinations/combination';
-import { LotteryCombination, type CombinationFactory } from 'src/combinations/lottery-combination';
-import { BaseLottery } from 'src/lottery/base-lottery';
-import { DrawDays, Weekday } from 'src/utils/days';
+import { BoundCombination, LotteryCombination, type CombinationFactory } from 'src/combinations/index.ts';
+import { BaseLottery } from 'src/lottery/index.ts';
+import { DrawDays, Weekday } from 'src/utils/index.ts';
 import { describe, expect, it } from 'vitest';
 
 function buildCombinationFactory(): [CombinationFactory, LotteryCombination] {

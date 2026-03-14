@@ -1,6 +1,6 @@
-import { EuroDreamsCombination } from 'src/combinations';
-import { EuroDreams } from 'src/lottery';
-import { Weekday } from 'src/utils/days';
+import { EuroDreamsCombination } from 'src/combinations/index.ts';
+import { EuroDreams } from 'src/lottery/index.ts';
+import { Weekday } from 'src/utils/index.ts';
 import { describe, expect, it } from 'vitest';
 
 describe('EuroDreams', () => {
