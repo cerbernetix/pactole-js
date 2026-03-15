@@ -1,49 +1,45 @@
-import { LotteryCombination, type CombinationFactory, type CombinationInputOrRank } from '../combinations/index.ts';
+import {
+    LotteryCombination,
+    type CombinationFactory,
+    type CombinationInput,
+    type CombinationInputOrRank,
+    type CombinationRank
+} from '../combinations/index.ts';
+import { FoundCombination, type DrawRecord } from '../data/models.ts';
 import { DrawDays, Weekday, type DayInput } from '../utils/days.ts';
 
 /**
- * Options for creating a {@link BaseLottery}.
+ * Provider contract consumed by {@link BaseLottery}.
  */
-export interface BaseLotteryOptions {
-    /**
-     * Draw schedule for the lottery. May be a `DrawDays` instance or any iterable
-     * of `DayInput` values (numbers, strings, `Date`, or `Weekday`).
-     *
-     * @default []
-     */
-    drawDays?: DrawDays | Iterable<DayInput | Weekday>;
+export interface LotteryProvider {
+    drawDays: DrawDays;
+    combinationFactory: CombinationFactory;
+    load(force?: boolean): Promise<DrawRecord[]>;
+    loadRaw(force?: boolean): Promise<Record<string, unknown>[]>;
+}
 
-    /**
-     * Combination factory used by this lottery. Receives the same options
-     * object as {@link LotteryCombination.getCombination}. If `null` or not
-     * callable, a default `LotteryCombination` factory is used.
-     *
-     * @default null
-     */
-    combinationFactory?: CombinationFactory | null;
+/**
+ * Query options for {@link BaseLottery.find_records}.
+ */
+export interface FindRecordsOptions {
+    combination?: CombinationInput | LotteryCombination | null;
+    targetRank?: CombinationRank | null;
+    strict?: boolean;
+    force?: boolean;
+    components?: Record<string, CombinationInputOrRank | LotteryCombination>;
 }
 
 /**
  * A base class for lottery implementations.
  *
- * The class is essentially a thin wrapper around a draw-day schedule and a
- * combination factory. It provides convenience methods for computing draw dates
- * and delegating combination creation/generation.
+ * The class is a thin wrapper around a provider that exposes draw-day helpers,
+ * combination creation utilities, and cached-history queries.
  *
- * @param options - Configuration options.
- * @param options.drawDays - Draw schedule for the lottery. May be a `DrawDays` instance
- *   or any iterable of `DayInput` values (numbers, strings, `Date`, or `Weekday`).
- *   Defaults to an empty array.
- * @param options.combinationFactory - Combination factory used by this lottery.
- *   Receives the same options object as {@link LotteryCombination.getCombination}.
- *   If `null` or not callable, a default `LotteryCombination` factory is used.
+ * @param provider - Provider instance used by this lottery.
  *
  * @example
  * ```ts
- * const lottery = new BaseLottery({
- *   drawDays: [Weekday.MONDAY, Weekday.THURSDAY],
- *   combinationFactory: EuroMillionsCombination,
- * });
+ * const lottery = new BaseLottery(provider);
  *
  * lottery.drawDays; // DrawDays instance
  * lottery.combinationFactory; // factory function
@@ -51,17 +47,10 @@ export interface BaseLotteryOptions {
  * ```
  */
 export class BaseLottery {
-    private _drawDays: DrawDays;
-    private _combinationFactory: CombinationFactory;
+    private readonly _provider: LotteryProvider;
 
-    constructor({ drawDays = [], combinationFactory = null }: BaseLotteryOptions = {}) {
-        this._combinationFactory = LotteryCombination.getCombinationFactory(combinationFactory);
-
-        if (drawDays instanceof DrawDays) {
-            this._drawDays = drawDays;
-        } else {
-            this._drawDays = new DrawDays(drawDays as Iterable<DayInput>);
-        }
+    constructor(provider: LotteryProvider) {
+        this._provider = provider;
     }
 
     /**
@@ -76,7 +65,7 @@ export class BaseLottery {
      * ```
      */
     public get drawDays(): DrawDays {
-        return this._drawDays;
+        return this._provider.drawDays;
     }
 
     /**
@@ -92,7 +81,7 @@ export class BaseLottery {
      * ```
      */
     public get combinationFactory(): CombinationFactory {
-        return this._combinationFactory;
+        return this._provider.combinationFactory;
     }
 
     /**
@@ -112,7 +101,7 @@ export class BaseLottery {
      * @throws {RangeError} When `fromDate` string cannot be parsed.
      */
     public getLastDrawDate(fromDate: DayInput | Weekday | null = null, closest = true): Date {
-        return this._drawDays.get_last_draw_date(fromDate, closest);
+        return this._provider.drawDays.get_last_draw_date(fromDate, closest);
     }
 
     /**
@@ -132,7 +121,7 @@ export class BaseLottery {
      * @throws {RangeError} When `fromDate` string cannot be parsed.
      */
     public getNextDrawDate(fromDate: DayInput | Weekday | null = null, closest = true): Date {
-        return this._drawDays.get_next_draw_date(fromDate, closest);
+        return this._provider.drawDays.get_next_draw_date(fromDate, closest);
     }
 
     /**
@@ -152,7 +141,7 @@ export class BaseLottery {
      * ```
      */
     public generate({ n = 1, partitions = 1 }: { n?: number; partitions?: number } = {}): LotteryCombination[] {
-        return this._combinationFactory().generate({ n, partitions });
+        return this._provider.combinationFactory().generate({ n, partitions });
     }
 
     /**
@@ -169,6 +158,118 @@ export class BaseLottery {
      * ```
      */
     public getCombination(components: Record<string, CombinationInputOrRank>): LotteryCombination {
-        return this._combinationFactory({ components });
+        return this._provider.combinationFactory({ components });
+    }
+
+    /**
+     * Return the total number of cached records.
+     */
+    public async count(): Promise<number> {
+        return (await this._provider.load()).length;
+    }
+
+    /**
+     * Return raw cached records.
+     *
+     * @param force - Whether to force a cache refresh first.
+     */
+    public async dump(force = false): Promise<Record<string, unknown>[]> {
+        return await this._provider.loadRaw(force);
+    }
+
+    /**
+     * Return cached records.
+     *
+     * @param force - Whether to force a cache refresh first.
+     */
+    public async get_records(force = false): Promise<DrawRecord[]> {
+        return await this._provider.load(force);
+    }
+
+    /**
+     * Return cached records.
+     *
+     * @param force - Whether to force a cache refresh first.
+     */
+    public async getRecords(force = false): Promise<DrawRecord[]> {
+        return await this.get_records(force);
+    }
+
+    /**
+     * Find cached records matching a query combination.
+     *
+     * @param options - Query options.
+     */
+    public async find_records({
+        combination = null,
+        targetRank = null,
+        strict = false,
+        force = false,
+        components = {}
+    }: FindRecordsOptions = {}): Promise<FoundCombination[]> {
+        const query = this._provider.combinationFactory({ combination, components });
+        const normalizedTargetRank = targetRank ?? (!strict ? query.minWinningRank : null);
+
+        if (normalizedTargetRank !== null) {
+            return await this._findRecordsByWinningRank(query, normalizedTargetRank, strict, force);
+        }
+
+        return await this._findRecordsByCombination(query, force);
+    }
+
+    /**
+     * Find cached records matching a query combination.
+     *
+     * @param options - Query options.
+     */
+    public async findRecords(options: FindRecordsOptions = {}): Promise<FoundCombination[]> {
+        return await this.find_records(options);
+    }
+
+    private async _findRecordsByCombination(
+        combination: LotteryCombination,
+        force = false
+    ): Promise<FoundCombination[]> {
+        const matches: FoundCombination[] = [];
+
+        for (const record of await this._provider.load(force)) {
+            if (record.combination.includes({ combination })) {
+                const winningRank = record.combination.getWinningRank({ combination }) as CombinationRank;
+
+                matches.push(
+                    new FoundCombination({
+                        record,
+                        rank: winningRank
+                    })
+                );
+            }
+        }
+
+        return matches;
+    }
+
+    private async _findRecordsByWinningRank(
+        combination: LotteryCombination,
+        targetRank: CombinationRank,
+        strict = false,
+        force = false
+    ): Promise<FoundCombination[]> {
+        const matches: FoundCombination[] = [];
+
+        for (const record of await this._provider.load(force)) {
+            const winningRank = record.combination.getWinningRank({ combination });
+            const isMatch = strict ? winningRank === targetRank : winningRank !== null && winningRank >= targetRank;
+
+            if (isMatch) {
+                matches.push(
+                    new FoundCombination({
+                        record,
+                        rank: winningRank as CombinationRank
+                    })
+                );
+            }
+        }
+
+        return matches;
     }
 }

@@ -1,4 +1,5 @@
 import terser from '@rollup/plugin-terser';
+import { builtinModules } from 'node:module';
 import { resolve } from 'path';
 import type { AliasOptions, ESBuildOptions } from 'vite';
 import { defineConfig, type ViteUserConfig } from 'vitest/config';
@@ -9,6 +10,19 @@ import packageInfo from './package.json';
 const baseUrl = `${process.env.BASE_URL || ''}/`.replace(/\/+/g, '/');
 
 const externalDependencies = [...Object.keys(packageInfo.dependencies || {})];
+const builtinModuleSet = new Set([...builtinModules, ...builtinModules.map(moduleName => `node:${moduleName}`)]);
+
+const isNodeBuiltin = (id: string): boolean => {
+    if (id.startsWith('node:')) {
+        return true;
+    }
+
+    if (builtinModuleSet.has(id)) {
+        return true;
+    }
+
+    return builtinModules.some(moduleName => id.startsWith(`${moduleName}/`));
+};
 
 // Global constants injected by Vite's define
 const define: Record<string, string> = {
@@ -43,7 +57,8 @@ export const libConfig: ViteUserConfig = {
         },
         rollupOptions: {
             plugins: [terser()],
-            external: (id: string) => externalDependencies.some(dep => id.startsWith(dep)),
+            external: (id: string) =>
+                isNodeBuiltin(id) || externalDependencies.some(dep => id === dep || id.startsWith(`${dep}/`)),
             output: {
                 compact: true
             }
@@ -64,12 +79,12 @@ export const libConfig: ViteUserConfig = {
             reportsDirectory: '.coverage',
             reporter: ['text', 'html', 'clover'],
             include: ['src/**/*.{js,ts}'],
-            exclude: ['*.config.*', '*.d.ts', 'src/main.ts'],
+            exclude: ['*.config.*', '*.d.ts', 'src/main.ts', 'src/**/index.ts', 'src/**/types.ts'],
             thresholds: {
-                statements: 80,
-                functions: 80,
-                lines: 80,
-                branches: 80
+                statements: 100,
+                functions: 100,
+                lines: 100,
+                branches: 100
             }
         }
     }

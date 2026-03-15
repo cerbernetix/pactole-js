@@ -1,9 +1,32 @@
 import { EuroDreamsCombination, type CombinationFactory } from '../combinations/index.ts';
-import { Weekday } from '../utils/days.ts';
-import { BaseLottery } from './base-lottery.ts';
+import { type DayInput } from '../utils/days.ts';
+import { getEnvironmentValue, importNamespace } from '../utils/system.ts';
+import { BaseLottery, type LotteryProvider } from './base-lottery.ts';
 
-// helper alias for the optional argument type of the factory
-type FactoryOpts = Parameters<CombinationFactory>[0];
+const DEFAULT_PROVIDER = 'pactole.data.providers.fdj.FDJProvider';
+const DEFAULT_ARCHIVES_PAGE = 'eurodreams';
+const DEFAULT_DRAW_DAYS = 'MONDAY,THURSDAY';
+const DEFAULT_DRAW_DAY_REFRESH_TIME = '22:00';
+const DEFAULT_CACHE_NAME = 'eurodreams';
+
+type ProviderConstructor = new (options: {
+    resolver: string;
+    drawDays: DayInput[];
+    drawDayRefreshTime: string;
+    combinationFactory: CombinationFactory;
+    cacheName: string;
+}) => LotteryProvider;
+
+const parseDrawDays = (value: string): DayInput[] =>
+    value
+        .split(',')
+        .map(day => day.trim())
+        .filter(day => day.length > 0);
+
+const createCombinationFactory = (): CombinationFactory => {
+    const template = new EuroDreamsCombination();
+    return ({ combination = null, components = {} } = {}) => template.getCombination({ combination, components });
+};
 
 /**
  * Class representing the EuroDreams lottery.
@@ -24,16 +47,27 @@ type FactoryOpts = Parameters<CombinationFactory>[0];
  * ```
  */
 export class EuroDreams extends BaseLottery {
-    constructor() {
-        super({
-            drawDays: [Weekday.MONDAY, Weekday.THURSDAY],
-            combinationFactory: (opts: FactoryOpts = {}) => {
-                const comps = (opts as { components?: Record<string, unknown> }).components || {};
-                return new EuroDreamsCombination({
-                    numbers: (comps as { numbers?: unknown }).numbers as unknown as number[],
-                    dream: (comps as { dream?: unknown }).dream as unknown as number[]
-                });
-            }
-        });
+    constructor(provider: LotteryProvider | null = null) {
+        if (provider === null) {
+            const providerClassName = getEnvironmentValue('EURODREAMS_PROVIDER_CLASS', DEFAULT_PROVIDER);
+            const providerClass = importNamespace<ProviderConstructor>(providerClassName);
+            const drawDays = parseDrawDays(getEnvironmentValue('EURODREAMS_DRAW_DAYS', DEFAULT_DRAW_DAYS));
+            const drawDayRefreshTime = getEnvironmentValue(
+                'EURODREAMS_DRAW_DAY_REFRESH_TIME',
+                DEFAULT_DRAW_DAY_REFRESH_TIME
+            );
+            const cacheName = getEnvironmentValue('EURODREAMS_CACHE_NAME', DEFAULT_CACHE_NAME);
+            const archivesPage = getEnvironmentValue('EURODREAMS_ARCHIVES_PAGE', DEFAULT_ARCHIVES_PAGE);
+
+            provider = new providerClass({
+                resolver: archivesPage,
+                drawDays,
+                drawDayRefreshTime,
+                combinationFactory: createCombinationFactory(),
+                cacheName
+            });
+        }
+
+        super(provider);
     }
 }
