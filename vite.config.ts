@@ -79,7 +79,7 @@ export const libConfig: ViteUserConfig = {
             reportsDirectory: '.coverage',
             reporter: ['text', 'html', 'clover'],
             include: ['src/**/*.{js,ts}'],
-            exclude: ['*.config.*', '*.d.ts', 'src/main.ts'],
+            exclude: ['*.config.*', '*.d.ts', 'src/main.ts', 'src/**/index.ts', 'src/**/types.ts'],
             thresholds: {
                 statements: 80,
                 functions: 80,
